@@ -1,0 +1,73 @@
+
+<div class=" content">
+    <select-unidade (emitirShow)="pesquisarP($event)" (emitirUnidade)="listFornecedorUnidadeById($event)"></select-unidade>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-delivery-fast  text-danger-states"> </i> Novo Fornecedor</h5></div>
+          <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="formFornecedor()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+          <div class=" card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" row" *ngIf="mostrar">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">Fornecedores</h4>
+            <form>
+              <div class=" row">
+                <div class=" col-md-12">
+                    <div class=" form-group">
+                      <label></label>
+                      <input
+                        #searchFornecedor
+                        [(ngModel)] ="pesquisarFornecedor"
+                        name="pesquisarFornecedor"
+                        autocomplete="off"
+                        (keypress)="searchAllFornecedor()"
+                        class=" form-control"
+                        placeholder="O que você quer pesquisar"
+                        type="text"
+                      />
+                  </div>
+                </div>
+                <div class=" card-footer">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>Fornecedor</th>
+                    <th>Telefone</th>
+                    <th>Responsável</th>
+                    <th class=" text-center">#</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="data">
+                  <tr *ngFor="let fornecedor of fornecedores$ | async">
+                    <td>{{ fornecedor.id }}</td>
+                    <td>{{ fornecedor.razaoSocial }}</td>
+                    <td>{{ fornecedor.telefone | mask:'(00) 0 0000-0000 || (00) 0000-0000' }}</td>
+                    <td>{{ fornecedor.responsavel }}</td>
+                    <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(fornecedor.id)"><i class="tim-icons icon-pencil"></i></button><button class="btn btn btn-round btn-icon mr-1" (click)="onDelete(fornecedor.id)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!data">
+                  <tr>
+                    <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

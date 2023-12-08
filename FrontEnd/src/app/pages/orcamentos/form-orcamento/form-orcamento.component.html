@@ -1,0 +1,290 @@
+<div class="content">
+  <div class=" row">
+      <div class=" col-md-12">
+      <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-cart text-danger-states"></i> {{ opcao }} Orçamento</h5></div>
+          <div class=" card-body">
+          <form #forOrc="ngForm">
+              <div class=" row">
+                  <div class=" col-md-3">
+                      <div class=" form-group">
+                          <label> Data</label>
+                          <input
+                          class=" form-control"
+                          readonly
+                          type="date"
+                          name="data"
+                          [ngModel] ="formOrcamento.data | date: 'yyyy-MM-dd'"
+                          />
+                      </div>
+                  </div>
+                  <div class=" col-md-4">
+                  <div class=" form-group">
+                    <label> Selecione uma unidade*</label>
+                    <select class="form-control"
+                    [(ngModel)] = "formOrcamento.unidadeId"
+                    name="unidade"
+                    [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'"
+                    #unidade ="ngModel"
+                    required (change)="onChange($event, unidade.value)">
+                    <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                    </select>
+                    <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                  </div>
+                  <div class=" col-md-5">
+                    <div class=" form-group">
+                      <label> Cliente*</label>
+                      <select class="form-control"
+                      [(ngModel)]="formOrcamento.clienteId"
+                      name="clienteId"
+                      #cliente="ngModel"
+                      required
+                      [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'">
+                      <option *ngFor="let client of clients" value="{{ client.id }}">{{ client.razaoSocial }}</option>
+                      </select>
+                      <div *ngIf="!cliente.valid && cliente.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                  </div>
+              </div>
+              <div *ngIf="nameBotao != 'Salvar' && formOrcamento.statusPedido =='Negociando'" [ngSwitch]="verifica" class="row d-flex justify-content-center">
+                    <div *ngSwitchCase="'Negociando'" role="alert" style="width: 90%;" class="alert alert-info text-center"><span>Negociando</span></div>
+                    <div *ngSwitchCase="'Aprovado'"  role="alert" style="width: 90%;" class="alert alert-success text-center"><span>Aprovado</span></div>
+                    <div *ngSwitchCase="'Cancelado'" role="alert" style="width: 90%;" class="alert alert-danger text-center"><span>Cancelado</span></div>
+                    <div *ngSwitchCase="'Faturado'" role="alert" style="width: 90%; background: #344675" class="alert text-center"><span>Faturado</span></div>
+              </div>
+              <div *ngIf="nameBotao != 'Salvar' && formOrcamento.statusPedido != 'Negociando'" [ngSwitch]="formOrcamento.statusPedido" class="row d-flex justify-content-center">
+                <div *ngSwitchCase="'Negociando'" role="alert" style="width: 90%;" class="alert alert-info text-center"><span>Negociando</span></div>
+                <div *ngSwitchCase="'Aprovado'"  role="alert" style="width: 90%;" class="alert alert-success text-center"><span>Aprovado</span></div>
+                <div *ngSwitchCase="'Cancelado'" role="alert" style="width: 90%;" class="alert alert-danger text-center"><span>Cancelado</span></div>
+                <div *ngSwitchCase="'Faturado'" role="alert" style="width: 90%; background: #344675" class="alert text-center"><span>Faturado</span></div>
+          </div>
+
+          </form>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class=" card">
+                  <div class="card-header">
+                      <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-bullet-list-67 text-danger-states"></i> Ítens</h5></div>
+                  </div>
+
+                  <div class="card-body">
+                      <form #formOrItem="ngForm">
+                      <div class="row">
+                          <div class=" col-md-4">
+                              <div class=" form-group">
+                                <label> Produto*</label>
+                                <select class="form-control"
+                                [(ngModel)]="formOrcItem.produto"
+                                #produto="ngModel"
+                                name="produto"
+                                id="produto"
+                                required
+                                [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'">
+                                <option *ngFor="let stock of stocks" value="{{ stock.produto }}">{{ stock.produto }}</option>
+                                </select>
+                                <div *ngIf="!produto.valid && produto.touched" class="erro text-center">*Campo Obrigatório.</div>
+                              </div>
+                              </div>
+                          <div class=" col-md-4">
+                              <div class=" form-group">
+                                  <label> Volume* (ton)</label>
+                                  <input
+                                      class=" form-control"
+                                      type="number"
+                                      [(ngModel)]="formOrcItem.volume"
+                                      name="volume"
+                                      id="volume"
+                                      #volume = "ngModel"
+                                      required
+                                      [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'"
+                                  />
+                                  <div *ngIf="!volume.valid && volume.touched" class="erro text-center">*Campo Obrigatório.</div>
+                              </div>
+                          </div>
+                          <div class=" col-md-4">
+                              <div class=" form-group">
+                                  <label> Vl Unitário*</label>
+                                  <input
+                                      class=" form-control"
+                                      type="text"
+                                      name="vlUnitario"
+                                      id="vlUnitario"
+                                      [(ngModel)]="formOrcItem.vlUnitario"
+                                      #vlUnitario="ngModel"
+                                      required
+                                      [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'"
+                                      mask="separator.2" prefix="R$ " thousandSeparator="."
+                                  />
+                                  <div *ngIf="!vlUnitario.valid && vlUnitario.touched" class="erro text-center">*Campo Obrigatório.</div>
+                              </div>
+                          </div>
+                          <div class=" col-md-4">
+                              <div class=" form-group">
+                                  <label> Vl Total</label>
+                                  <input
+                                      class=" form-control"
+                                      type="text"
+                                      readonly
+                                      value="{{formOrcItem.volume * formOrcItem.vlUnitario | currency:'BRL'}}"
+                                  />
+                              </div>
+                          </div>
+                          <div class="col-md-2">
+                            <button class="btn btn-primary btn-round btn-icon btn-lg" (click)="add()" [disabled]="!formOrItem.valid"><i class="tim-icons icon-simple-add"></i></button>
+                          </div>
+                      </div>
+                    </form>
+
+                      <hr>
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class=" table-responsive">
+                                  <table class=" table tablesorter" id="">
+                                    <thead class=" text-primary">
+                                      <tr>
+                                        <th>Produto</th>
+                                        <th>Volume (ton)</th>
+                                        <th>Vl Unitário</th>
+                                        <th>Vl Total</th>
+                                        <th class=" text-center">#</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let item of itensOrc; let i=index">
+                                        <td>{{ item.produto }}</td>
+                                        <td>{{ item.volume }}</td>
+                                        <td>{{ item.vlUnitario | currency:'BRL'}}</td>
+                                        <td>{{ item.volume * item.vlUnitario| currency:'BRL'}}</td>
+                                        <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1" [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'"><i class="tim-icons icon-trash-simple" (click)="remove(item.id, i)"></i></button></td>
+                                      </tr>
+                                    </tbody>
+                                    <tbody *ngIf="itensOrc == '' || !itensOrc">
+                                      <tr>
+                                        <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class=" col-md-3">
+                            <div class=" form-group">
+                                <label>Tonelada</label>
+                                <input
+                                    class=" form-control"
+                                    type="text"
+                                    readonly
+                                    value="{{ getTon(itensOrc)}}"
+                                />
+                            </div>
+                        </div>
+                        <div class=" col-md-3">
+                          <div class=" form-group">
+                              <label>Total Geral</label>
+                              <input
+                                  class=" form-control"
+                                  type="text"
+                                  readonly
+                                  value="{{ getSubTotal(itensOrc)  | currency:'BRL'}}"
+                              />
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class=" card">
+                  <div class="card-header">
+                      <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-coins text-danger-states"></i> Pagamento</h5></div>
+                  </div>
+                  <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                          <div class=" form-group">
+                            <label> Condição de pagamento*</label>
+                            <select class="form-control"
+                                name="condicao"
+                                [(ngModel)]="formOrcamento.condicaoPagamento"
+                                #condicao="ngModel"
+                                required
+                                [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'">
+                            <option value="Boleto" selected>Boleto</option>
+                            <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Cartão de Débito">Cartão de Débito</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="PIX">PIX</option>
+                            <option value="Tranferência">Tranferência</option>
+                            </select>
+                            <div *ngIf="!condicao.valid && condicao.touched" class="erro text-center">*Campo Obrigatório.</div>
+                          </div>
+                        </div>
+                        <div class=" col-md-4">
+                          <div class=" form-group">
+                              <label>Prazo para pagamento (dias)*</label>
+                              <input
+                                  class=" form-control"
+                                  type="text"
+                                  name="prazo"
+                                  [(ngModel)]="formOrcamento.prazoPagamento"
+                                  #prazo="ngModel"
+                                  required
+                                  [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'"
+                              />
+                              <div *ngIf="!prazo.valid && prazo.touched" class="erro text-center">*Campo Obrigatório.</div>
+                          </div>
+                        </div>
+                        <div class=" col-md-4">
+                          <div class=" form-group">
+                              <label>Vl Total do Orçamento</label>
+                              <input
+                              readonly
+                                  class=" form-control"
+                                  type="text"
+                                  value="{{ getSubTotal(itensOrc)  | currency:'BRL'}}"
+                              />
+                          </div>
+                        </div>
+                    </div>
+                    <div class=" row">
+                      <div class=" col-md-12">
+                          <div class=" form-group">
+                          <label> Observação</label>
+                          <textarea class="form-control" rows="4"
+                          name="observacao"
+                          [(ngModel)]="formOrcamento.observacao"
+                          #observacao="ngModel"
+                          [disabled] = "verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'"
+                          ></textarea>
+                          </div>
+                      </div>
+                  </div>
+                </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class=" card">
+                  <div class="card-header">
+                    <button style="margin: 10px;" class=" btn btn-neutral" [disabled]="!forOrc.valid || verifica == 'Faturado' || verifica == 'Cancelado'" type="submit" (click)="enviar()" >{{nameBotao}}</button>
+                    <button *ngIf="nameBotao != 'Salvar'" style="margin: 10px;" class=" btn btn-success" [disabled]="!forOrc.valid || verifica == 'Aprovado' || verifica == 'Cancelado' || verifica == 'Faturado'" type="submit" (click)="aprovar()">Aprovar</button>
+                    <button *ngIf="nameBotao != 'Salvar'" style="margin: 10px;" class=" btn btn-info" [disabled]="!forOrc.valid || verifica == 'Faturado' || verifica == 'Cancelado' || verifica == 'Negociando'" type="submit" (click)="faturar()">Faturar</button>
+                    <button *ngIf="nameBotao != 'Salvar'" style="margin: 10px;" class=" btn btn-danger" [disabled]="!forOrc.valid || verifica == 'Cancelado' || verifica == 'Aprovado' || verifica == 'Faturado'" type="submit" (click)="cancelar()">Cancelar</button>
+                    <button style="margin: 10px;" class=" btn  btn-fill" type="submit" (click)="voltar()">Voltar</button>
+                  </div>
+                  <div class="card-body">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

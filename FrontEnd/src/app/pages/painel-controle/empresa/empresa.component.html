@@ -1,0 +1,76 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-bank text-danger-states"> </i> Nova Empresa</h5></div>
+          <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="showformEmpresa()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+          <div class=" card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">Empresa</h4>
+            <form>
+              <div class=" row">
+                <div class=" col-md-12">
+                  <div class=" form-group">
+                    <label></label>
+                    <input type="text"
+                    #searhEmpresa
+                    class=" form-control"
+                    name="searhEmpresa"
+                    (keypress)="searchAllEmpresa()"
+                    [(ngModel)] = "searchEmpresa"
+                    placeholder="O que você quer pesquisar"
+                  />
+                </div>
+              </div>
+                <div class=" card-footer">
+
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>CPF/CNPJ</th>
+                    <th>Empresa</th>
+                    <th class=" text-center">#</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="showData">
+                  <tr *ngFor="let empresa of empresas$ | async">
+                    <td>{{ empresa.id }}</td>
+                    <td>{{ empresa.cnpj | mask: '99.999.999/999-999' }}</td>
+                    <td>{{ empresa.razaoSocial }}</td>
+                    <td class=" text-center">
+                      <button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(empresa.id)">
+                        <i class="tim-icons icon-pencil"></i>
+                      </button>
+                      <button class="btn btn btn-round btn-icon mr-1" (click)="onDelete(empresa.id)">
+                        <i class="tim-icons icon-trash-simple"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!showData">
+                  <tr>
+                    <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhuma empresa cadastrada</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

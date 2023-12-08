@@ -1,0 +1,53 @@
+    <div class="main">
+    <div *ngIf="sucesso" class="loader"></div>
+        <div class="cartao">
+        <div class="card-header" style="background-color: white !important;">
+            <img class="imgLogo" src="../../assets/img/logo-login.png" alt="Logo Usistok">
+
+        </div>
+        <div class="card-body">
+           <div class="row">
+            <form #f = "ngForm">
+            <div class="title">Faça seu login</div>
+
+            <div class=" col-md-12 px-md-1">
+                <div class=" form-group">
+                    <input [(ngModel)]="usuario.login"
+                    class=" form-control text-primary"
+                    id="usuario"
+                    name="usuario"
+                    type="text" placeholder="Digite seu e-mail"
+                    required #nome="ngModel"/>
+
+                    <div *ngIf="!nome.valid && nome.touched" style="color: red;">Digite seu Usuário.</div>
+                </div>
+            </div>
+
+            <div class=" col-md-12 px-md-1">
+                <div class=" form-group">
+                    <input [(ngModel)]="usuario.password"
+                    id="senha"
+                    name="senha"
+                    class=" form-control text-primary"
+                    type="password" placeholder="Digite sua senha"
+                    required #senha="ngModel" />
+                    <div *ngIf="!senha.valid && senha.touched" style="color: red;">Digite sua senha.</div>
+                </div>
+                <div>
+                    <button class=" btn btn-danger btn-danger"
+                    type="submit" name="action" (click)="logar()" [disabled]="!f.valid">ACESSAR</button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+        <div class="card-footer" style="background-color: white !important;">
+
+                <a target="_blank">Esqueceu Senha?</a>
+        </div>
+    </div>
+    <div class="overlayer"></div>
+    <video autoplay loop playsinline>
+        <source src="../../assets/img/video.mp4" type="video/mp4">
+    </video>
+</div>

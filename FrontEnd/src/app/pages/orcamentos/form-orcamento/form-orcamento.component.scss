@@ -1,0 +1,64 @@
+.ng-invalid .ng-touched:not(form){
+    border: 1px solid red;
+    border-radius: 10px;
+}
+.erro{
+    color: red !important;
+    margin-top: -16px !important;
+
+}
+
+.botoes {
+    width: 15% !important;
+}
+
+.erros {
+    background-color: #eb5e2e;
+    z-index: 999;
+    width: 100%;
+    position:absolute;
+    top: 0;
+    margin: 0;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .sucesso {
+    background-color: #00bf9a;
+    z-index: 999;
+    width: 100%;
+    position:absolute;
+    top: 0;
+    margin: 0;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+
+  .alertTrash {
+    background-color: #eb5e2e;
+    z-index: 999;
+    width: 30%;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-32.5%, -50%);
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 990px){
+    .alertTrash {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+    }
+}
+

@@ -1,0 +1,53 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-square-pin text-danger"></i> {{ opcaoRegisterOrEdit }} Unidade</h5></div>
+          <div class=" card-body">
+            <form #formUnidad="ngForm">
+              <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                  <div class=" form-group">
+                    <label> Nome da Unidade*</label>
+                    <input
+                      class=" form-control"
+                      name="nomeUnidade"
+                      [(ngModel)]="formUnidade.nomeUnidade"
+                      #nomeUnidade="ngModel"
+                      required
+                      type="text"
+                    />
+                    <div *ngIf="!nomeUnidade.valid && nomeUnidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-6">
+                    <div class=" form-group">
+                        <label> Empresa*</label>
+                        <select class="form-control"
+                        name="empresa"
+                        [(ngModel)]="formUnidade.idEmpresa"
+                        #empresa="ngModel"
+                        required>
+                          <option *ngFor="let empresa of empresas" value="{{ empresa.id }}">{{ empresa.razaoSocial }}</option>
+                        </select>
+                        <div *ngIf="!empresa.valid && empresa.touched" class="erro text-center">*Campo Obrigatório.</div>
+                      </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <buttons-footer (enviarSubmit)="sendUnidade($event)" [valida]="!formUnidad.valid" [idUnidade] ="idEdit"></buttons-footer>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+</div>

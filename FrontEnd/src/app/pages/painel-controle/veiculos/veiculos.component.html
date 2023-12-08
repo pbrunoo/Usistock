@@ -1,0 +1,72 @@
+
+<div class=" content">
+  <select-unidade (emitirShow)="pesquisarP($event)" (emitirUnidade)="listVeiculoUnidadeById($event)"></select-unidade>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-bus-front-12  text-danger-states"> </i> Novo Veículo</h5></div>
+          <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="formVeiculos()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+          <div class=" card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" row" *ngIf="mostrar">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">Veículos</h4>
+            <form>
+              <div class=" row">
+                <div class=" col-md-12">
+                    <div class=" form-group">
+                      <label></label>
+                      <input
+                        #searchVeiculo
+                        [(ngModel)]="pesquisarVeiculo"
+                        name="pesquisarVeiculo"
+                        class=" form-control"
+                        (keypress)="searchAllVeiculos()"
+                        placeholder="O que você quer pesquisar"
+                        type="text"
+                      />
+                  </div>
+                </div>
+                <div class=" card-footer">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>Veículo</th>
+                    <th>Placa</th>
+                    <th>Responsável</th>
+                    <th class=" text-center">#</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="data">
+                  <tr *ngFor="let veiculo of veiculos$ | async">
+                    <td>{{ veiculo.id }}</td>
+                    <td>{{ veiculo.veiculo }}</td>
+                    <td>{{ veiculo.placa | mask: 'SSS-0000' }}</td>
+                    <td>{{ veiculo.responsavel }}</td>
+                    <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1"><i class="tim-icons icon-pencil" (click)="onEdit(veiculo.id)"></i></button><button class="btn btn btn-round btn-icon mr-1" (click)="onDelete(veiculo.id)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!data">
+                  <tr>
+                    <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,229 @@
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-single-02 text-danger"></i> {{opcao}} Usuário</h5></div>
+          <div class=" card-body">
+            <form #Formulario = "ngForm">
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Login*</label>
+                    <input
+                      class=" form-control"
+                      placeholder=""
+                      type="text"
+                      name="login"
+                      [(ngModel)] ="formUser.login"
+                      required
+                      #itemLogin="ngModel"
+                    />
+                    <div *ngIf="!itemLogin.valid && itemLogin.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3 px-md-1">
+                  <div class=" form-group">
+                    <label> Senha*</label>
+                    <input
+                      class=" form-control"
+                      name="senha"
+                      [(ngModel)]="formUser.senha"
+                      #senha="ngModel"
+                      required
+                      placeholder=""
+                      type="password"
+                    />
+                    <div *ngIf="!senha.valid && senha.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-5 pl-md-1">
+                  <div class=" form-group">
+                    <label> E-mail*</label>
+                    <input
+                      class=" form-control"
+                      name="email"
+                      [(ngModel)] = "formUser.email"
+                      placeholder="mike@email.com"
+                      #email = "ngModel"
+                      type="email"
+                      required
+                      email
+                    />
+                    <div *ngIf="!email.valid && email.touched" class="erro text-center">*E-mail Inválido.</div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-5 pr-md-1">
+                  <div class=" form-group">
+                    <label> Nome Completo* </label>
+                    <input
+                      class=" form-control"
+                      name="nome"
+                      [(ngModel)] = "formUser.nome"
+                      #nome = "ngModel"
+                      placeholder="Mike"
+                      type="text"
+                      required
+                    />
+                    <div *ngIf="!nome.valid && nome.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3 pl-md-1">
+                    <div class=" form-group">
+                        <label> Sexo*</label>
+                        <select class="form-control"
+                        name="sexo"
+                        [(ngModel)]="formUser.sexo"
+                        #sexo = "ngModel"
+                        required>
+                        <option value="1">Masculino</option>
+                        <option value="2">Feminino</option>
+                        </select>
+                        <div *ngIf="!sexo.valid && sexo.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-4 pl-md-1">
+                    <div class=" form-group">
+                      <label> Data de Nascimento*</label>
+                      <input
+                        class=" form-control"
+                        name="dataNasc"
+                        [(ngModel)]="formUser.dataNascimento"
+                        #dataNasc="ngModel"
+                        required
+                        type="date"
+                      />
+                      <div *ngIf="!dataNasc.valid && dataNasc.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                  </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-4">
+                    <div class=" form-group">
+                      <label> Telefone*</label>
+                      <input
+                        class=" form-control"
+                        name="telefone"
+                        [(ngModel)] = "formUser.telefone"
+                        #telefone="ngModel"
+                        placeholder="(99) 9 8393-4455"
+                        mask="(00) 0000-0000 || (00) 0 0000-0000"
+                        type="text"
+                        required
+                      />
+                      <div *ngIf="!telefone.valid && telefone.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-8">
+                  <div class=" form-group">
+                    <label> Endereço*</label>
+                    <input
+                      class=" form-control"
+                      name="endereco"
+                      [(ngModel)]="formUser.endereco"
+                      #endereco="ngModel"
+                      placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                      type="text"
+                      required
+                    />
+                    <div *ngIf="!endereco.valid && endereco.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Bairro*</label>
+                    <input
+                      class=" form-control"
+                      name="bairro"
+                      [(ngModel)]="formUser.bairro"
+                      #bairro="ngModel"
+                      type="text"
+                      required
+                    />
+                    <div *ngIf="!bairro.valid && bairro.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-4 px-md-1">
+                  <div class=" form-group">
+                    <label> Cidade*</label>
+                    <input
+                      class=" form-control"
+                      name="cidade"
+                      [(ngModel)]="formUser.cidade"
+                      #cidade="ngModel"
+                      required
+                      placeholder=""
+                      type="text"
+                    />
+                    <div *ngIf="!cidade.valid && cidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-4 pl-md-1">
+                  <div class=" form-group">
+                    <label> CEP*</label>
+                    <input
+                      class=" form-control"
+                      name="cep"
+                      [(ngModel)]="formUser.cep"
+                      #cep="ngModel"
+                      required
+                      placeholder="Código postal"
+                      mask="00.000-000"
+                      type="text"
+                    />
+                    <div *ngIf="!cep.valid && cep.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-4">
+                    <div class=" form-group">
+                        <label> Nível de Acesso*</label>
+                        <select class="form-control"
+                        name="nivelAcesso"
+                        [(ngModel)]="formUser.nivelAcesso"
+                        #nivelAcesso="ngModel"
+                        required>
+                        <option value="Colaborador">Colaborador</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Diretor">Diretor</option>
+                        </select>
+                        <div *ngIf="!nivelAcesso.valid && nivelAcesso.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-4">
+                  <div class=" form-group">
+                      <label> Unidade*</label>
+                      <select class="form-control"
+                      name="unidade"
+                      [(ngModel)]="formUser.unidadeId"
+                      #unidade="ngModel"
+                      required>
+                      <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                      </select>
+                      <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+              </div>
+                <div class="col-md-4">
+                    <label> Foto</label>
+                    <input type="file" class=" form-control">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <buttons-footer (enviarSubmit)="user($event)" [valida]="!Formulario.valid" [idUser]="formUser.id"></buttons-footer>
+              </div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>

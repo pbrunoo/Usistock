@@ -1,0 +1,80 @@
+
+<div class=" content">
+  <select-unidade (emitirShow)="pesquisarP($event)" (emitirUnidade)="listOrcamentoUnidadeById($event)"></select-unidade>
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-chat-33  text-danger-states"> </i> Novo Orçamento</h5></div>
+        <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="formOrcamento()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+        <div class=" card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row" *ngIf="mostrar">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Orçado</h4>
+          <form>
+            <div class=" row">
+              <div class=" col-md-12">
+                  <div class=" form-group">
+                    <label></label>
+                    <input
+                      #searchOrcamento
+                      [(ngModel)]="pesquisarOrcamento"
+                      (keypress)="searchAllOrcamento()"
+                      name="pesquisarOrcamento"
+                      class=" form-control"
+                      placeholder="O que você quer pesquisar"
+                      type="text"
+                    />
+                </div>
+              </div>
+              <div class=" card-footer">
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Data</th>
+                  <th>Cliente</th>
+                  <th>Status</th>
+                  <th>Valor líquido</th>
+                  <th class=" text-center">#</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="data">
+                <tr *ngFor="let orcamento of orcamentos$ | async">
+                  <td>{{ orcamento.data | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ orcamento.clienteId }}</td>
+                  <td>
+                      <div [ngSwitch]="orcamento.statusPedido">
+                        <div *ngSwitchCase="'Negociando'" role="alert" style="width: 80%; height: 50%;" class="alert alert-info text-center"><span>{{ orcamento.statusPedido }}</span></div>
+                        <div *ngSwitchCase="'Aprovado'" role="alert" style="width: 80%; height: 50%;" class="alert alert-success text-center"><span>{{ orcamento.statusPedido }}</span></div>
+                        <div *ngSwitchCase="'Cancelado'" role="alert" style="width: 80%; height: 50%;" class="alert alert-danger text-center"><span>{{ orcamento.statusPedido }}</span></div>
+                        <div *ngSwitchCase="'Faturado'" role="alert" style="width: 80%; height: 50%; background: #344675" class="alert text-center"><span>{{ orcamento.statusPedido }}</span></div>
+                      </div>
+                  </td>
+                  <td>{{ orcamento.vlTotal | currency: 'BRL' }}</td>
+                  <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(orcamento.id)"><i class="tim-icons icon-pencil"></i></button><button class="btn btn btn-round btn-icon mr-1" [disabled]="orcamento.statusPedido == 'Aprovado' || orcamento.statusPedido == 'Faturado'" (click)="onDelete(orcamento.id)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="!data">
+                <tr>
+                  <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

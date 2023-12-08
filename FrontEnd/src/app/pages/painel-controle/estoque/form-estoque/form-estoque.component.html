@@ -1,0 +1,164 @@
+
+<div class=" content">
+
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <form #forEstoque="ngForm">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-app text-danger"></i> {{ opcaoRegisterOrEdit }} Estoque</h5></div>
+          <div class=" card-body">
+              <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                  <div class=" form-group">
+                    <label> Produto*</label>
+                    <input
+                      class=" form-control"
+                      placeholder="Pó de Brita"
+                      name="produto"
+                      [(ngModel)]="formEstoque.produto"
+                      #produto="ngModel"
+                      required
+                      type="text"
+                    />
+                    <div *ngIf="!produto.valid && produto.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-6">
+                  <div class=" form-group">
+                      <label> Selecione uma unidade*</label>
+                      <select class="form-control"
+                      [(ngModel)]="formEstoque.unidadeId"
+                      name="unidade"
+                      #unidade ="ngModel"
+                      required>
+                      <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                      </select>
+                      <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+              </div>
+              </div>
+          </div>
+        </form>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-app text-danger"></i> Histórico</h5></div>
+            </div>
+            <div class="card-body">
+                <div class=" card-body">
+                  <div class="row">
+                    <!--div class=" col-md-3 pl-md-1">
+                      <div class=" form-group">
+                        <label for="exampleInputEmail1"> Quantidade*</label>
+                        <input
+                          class=" form-control"
+                          name="quantidade"
+                          [(ngModel)]="historicoEstoque.quantidade"
+                          #quantidade="ngModel"
+                          type="number"
+                        />
+                      </div>
+                    </!--div>
+                    <div class=" col-md-3 pl-md-1">
+                      <div class=" form-group">
+                        <label> Vl. Unitário*</label>
+                        <input
+                          class=" form-control"
+                          name="vlUnitario"
+                          #vlUnitario="ngModel"
+                          [(ngModel)]="historicoEstoque.vlUnitario"
+                          type="text"
+                          mask="separator.2" prefix="R$ " thousandSeparator="."
+                        />
+                      </div>
+                    </div>
+                    <div class=" col-md-3 pl-md-1">
+                      <div class=" form-group">
+                        <label> Vl. Total</label>
+                        <input
+                          class=" form-control"
+                          name="vlTotal"
+                          readonly
+                          value="{{ historicoEstoque.quantidade * historicoEstoque.vlUnitario | currency:'BRL' }}"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div-- class="col-md-3 pl-md-1">
+                      <div class=" form-group">
+                        <button class="btn btn-primary btn-round btn-lg btn-icon mr-1" [disabled]="!quantidade.value || !vlUnitario.value" (click)="adicionar()"><i class="tim-icons icon-simple-add"></i></button>
+                    </div>
+                  </div-->
+                  <div class=" table-responsive">
+                      <table class=" table tablesorter">
+                        <thead class=" text-primary">
+                          <tr>
+                            <th>Ordem</th>
+                            <th>Data</th>
+                            <th>Tonelada</th>
+                            <th>Vl. Unitário</th>
+                            <th>Vl. Total</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="itensEstoque">
+                          <tr *ngFor="let item of itensEstoque; let i=index;">
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.data | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ item.quantidade }}</td>
+                            <td>{{ item.vlUnitario | currency: 'BRL' }}</td>
+                            <td>{{ item.quantidade * item.vlUnitario | currency: 'BRL' }}</td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="itensEstoque == '' || !itensEstoque">
+                          <tr>
+                            <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+              <div class=" col-md-3">
+                <div class=" form-group">
+                  <label>Em Estoque (ton)</label>
+                  <input
+                    class=" form-control"
+                    name="emEstoque"
+                    readonly
+                    value="{{ getEstoque(itensEstoque) }}"
+                    type="text"
+                    />
+                </div>
+              </div>
+              <div class=" col-md-3">
+                <div class=" form-group">
+                  <label>Total Geral</label>
+                  <input
+                    class=" form-control"
+                    name="TotalGeral"
+                    readonly
+                    value="{{ getTotal(itensEstoque)  | currency:'BRL'}}"
+                    type="text"
+                    />
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <button style="margin: auto 10px;" class=" btn btn-danger" type="submit" (click)="enviarEstoque()" >{{ opcaoRegisterOrEdit }}</button>
+              <button style="margin: auto 10px;" class=" btn btn-info" type="submit" >relatório</button>
+              <button style="margin: auto 10px;" class=" btn  btn-fill" type="submit" (click)="voltar()">Voltar</button>
+            </div>
+            <div class="card-body"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+</div>

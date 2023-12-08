@@ -1,0 +1,78 @@
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-delivery-fast text-danger"></i> {{ opcao }} Veículo</h5></div>
+          <div class=" card-body">
+            <form #forVeiculo="ngForm">
+              <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                  <div class=" form-group">
+                    <label> Veículo*</label>
+                    <input
+                      class=" form-control"
+                      name="veiculo"
+                      type="text"
+                      [(ngModel)]="formVeiculo.veiculo"
+                      #veiculo="ngModel"
+                      required
+                    />
+                    <div *ngIf="!veiculo.valid && veiculo.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-6">
+                    <div class=" form-group">
+                        <label> Placa*</label>
+                        <input
+                          class=" form-control"
+                          name="placa"
+                          [(ngModel)]="formVeiculo.placa"
+                          #placa="ngModel"
+                          required
+                          type="text"
+                          mask="SSS-0000"
+                        />
+                        <div *ngIf="!placa.valid && placa.touched" class="erro text-center">*Campo Obrigatório.</div>
+                      </div>
+                </div>
+                <div class=" col-md-6">
+                    <div class=" form-group">
+                        <label> Responsável*</label>
+                        <input class="form-control"
+                        name="responsavel"
+                        [(ngModel)]="formVeiculo.responsavel"
+                        #responsavel="ngModel"
+                        required>
+                        <div *ngIf="!responsavel.valid && responsavel.touched" class="erro text-center">*Campo Obrigatório.</div>
+                      </div>
+                </div>
+                <div class=" col-md-6">
+                  <div class=" form-group">
+                      <label> Selecione uma unidade*</label>
+                      <select class="form-control"
+                      [(ngModel)]="formVeiculo.unidadeId"
+                      name="unidade"
+                      #unidade ="ngModel"
+                      required>
+                      <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                      </select>
+                      <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <buttons-footer (enviarSubmit)="enviarVeiculo($event)" [valida]="!forVeiculo.valid" [idVeiculo]="idEdit"></buttons-footer>
+              </div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,413 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-bank text-danger"></i> {{ opcaoRegisterOrEdit }} Empresa</h5></div>
+          <div class=" card-body">
+            <form #formCad="ngForm">
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> CPF/CNPJ*</label>
+                    <input
+                      class=" form-control"
+                      placeholder=""
+                      type="text"
+                      name="cpfCnpj"
+                      [(ngModel)]="formEmpresa.cnpj"
+                      #cpfCnpj="ngModel"
+                      required
+                      mask="000.000.000-00||00.000.000/0000-00"
+                    />
+                    <div *ngIf="!cpfCnpj.valid && cpfCnpj.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3 px-md-1">
+                  <div class=" form-group">
+                    <label> Inscrição Estadual</label>
+                    <input
+                      class=" form-control"
+                      placeholder=""
+                      type="number"
+                      name="inscrEstadual"
+                      [(ngModel)]="formEmpresa.inscrEstadual"
+                      #inscrEstadual="ngModel"
+                      required
+                    />
+                    <div *ngIf="!inscrEstadual.valid && inscrEstadual.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-5 pl-md-1">
+                  <div class=" form-group">
+                    <label for="exampleInputEmail1"> Razão Social*</label>
+                    <input
+                      class=" form-control"
+                      name="razaoSocial"
+                      [(ngModel)]="formEmpresa.razaoSocial"
+                      #razaoSocial="ngModel"
+                      type="text"
+                      required
+                    />
+                    <div *ngIf="!razaoSocial.valid && razaoSocial.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Nome Fantasia* </label>
+                    <input
+                      class=" form-control"
+                      placeholder="Company LTda"
+                      type="text"
+                      name="nomeFantasia"
+                      [(ngModel)]="formEmpresa.nomeFantasia"
+                      #nomeFantasia="ngModel"
+                      required
+                    />
+                    <div *ngIf="!nomeFantasia.valid && nomeFantasia.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-2 pl-md-1">
+                    <div class=" form-group">
+                        <label> CEP*</label>
+                        <input
+                        class=" form-control"
+                        placeholder="74.000-000"
+                        type="text"
+                        mask="00.000-000"
+                        name="cep"
+                        [(ngModel)]="formEmpresa.cep"
+                        #cep="ngModel"
+                        required
+                      />
+                      <div *ngIf="!cep.valid && cep.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-6 pl-md-1">
+                    <div class=" form-group">
+                      <label> Endereço*</label>
+                      <input
+                        class=" form-control"
+                        placeholder="Av. Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        type="text"
+                        name="endereco"
+                        [(ngModel)]="formEmpresa.endereco"
+                        #endereco="ngModel"
+                        required
+                      />
+                      <div *ngIf="!endereco.valid && endereco.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                  </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-5">
+                    <div class=" form-group">
+                      <label> Complemento*</label>
+                      <input
+                        class=" form-control"
+                        type="text"
+                        name="complemento"
+                        [(ngModel)]="formEmpresa.complemento"
+                        #complemento="ngModel"
+                        required
+                      />
+                      <div *ngIf="!complemento.valid && complemento.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-2">
+                  <div class=" form-group">
+                    <label> Número*</label>
+                    <input
+                      class=" form-control"
+                      type="number"
+                      name="numero"
+                      [(ngModel)]="formEmpresa.numero"
+                      #numero="ngModel"
+                      required
+                    />
+                    <div *ngIf="!numero.valid && numero.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-5">
+                    <div class=" form-group">
+                      <label> Bairro*</label>
+                      <input
+                        class=" form-control"
+                        type="text"
+                        name="bairro"
+                        [(ngModel)]="formEmpresa.bairro"
+                        #bairro="ngModel"
+                        required
+                      />
+                      <div *ngIf="!bairro.valid && bairro.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-3">
+                    <div class=" form-group">
+                      <label> Cidade*</label>
+                      <input
+                        class=" form-control"
+                        type="text"
+                        name="cidade"
+                        [(ngModel)]="formEmpresa.cidade"
+                        #cidade="ngModel"
+                        required
+                      />
+                      <div *ngIf="!cidade.valid && cidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-2 pr-md-1">
+                  <div class=" form-group">
+                    <label> UF*</label>
+                    <select class="form-control"
+                    name="uf"
+                    [(ngModel)]="formEmpresa.uf"
+                    #uf="ngModel"
+                    required>
+                        <option value="1">AC</option>
+                        <option value="2">AL</option>
+                        <option value="3">AP</option>
+                        <option value="4">AM</option>
+                        <option value="5">BA</option>
+                        <option value="6">CE</option>
+                        <option value="7">DF</option>
+                        <option value="8">ES</option>
+                        <option value="9">GO</option>
+                        <option value="10">MA</option>
+                        <option value="11">MT</option>
+                        <option value="12">MS</option>
+                        <option value="13">MG</option>
+                        <option value="14">PA</option>
+                        <option value="15">PB</option>
+                        <option value="16">PR</option>
+                        <option value="17">PE</option>
+                        <option value="18">PI</option>
+                        <option value="19">RJ</option>
+                        <option value="20">RN</option>
+                        <option value="21">RS</option>
+                        <option value="22">RO</option>
+                        <option value="23">RR</option>
+                        <option value="24">SC</option>
+                        <option value="25">SP</option>
+                        <option value="26">SE</option>
+                        <option value="27">TO</option>
+                    </select>
+                    <div *ngIf="!uf.valid && uf.touched" class="erro text-center">*Campo Obrigatório.</div>
+                </div>
+                </div>
+                <div class=" col-md-3 px-md-1">
+                  <div class=" form-group">
+                    <label> Telefone/ Celular*</label>
+                    <input
+                      class=" form-control"
+                      placeholder="(62) 3333-4832"
+                      type="text"
+                      mask="(00) 0 0000-0000 || (00) 0000-0000"
+                      name="telefoneCelular"
+                      [(ngModel)]="formEmpresa.telefone"
+                      #telefoneCelular="ngModel"
+                      required
+                    />
+                    <div *ngIf="!telefoneCelular.valid && telefoneCelular.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-4 pl-md-1">
+                  <div class=" form-group">
+                    <label> E-mail*</label>
+                    <input
+                      class=" form-control"
+                      placeholder="email@email.com"
+                      type="email"
+                      name="email"
+                      [(ngModel)]="formEmpresa.email"
+                      #email="ngModel"
+                      required
+                      email
+                    />
+                    <div *ngIf="!email.valid && email.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class=" title"><i class="tim-icons icon-paper text-danger"></i> Retenção de Impostos</h5>
+            </div>
+            <div class="card-body">
+              <form #formRet="ngForm">
+                <div class="row">
+                    <div class=" col-md-2">
+                        <div class=" form-group">
+                          <label> PIS %</label>
+                          <input
+                            class=" form-control"
+                            type="number"
+                            name="pis"
+                            [(ngModel)]="formEmpresa.pis"
+                            #pis="ngModel"
+                          />
+                        </div>
+                    </div>
+                    <div class=" col-md-2">
+                        <div class=" form-group">
+                          <label> Cofins %</label>
+                          <input
+                            class=" form-control"
+                            type="number"
+                            name="cofins"
+                            [(ngModel)]="formEmpresa.cofins"
+                            #cofins="ngModel"
+                          />
+                        </div>
+                    </div>
+                    <div class=" col-md-2">
+                        <div class=" form-group">
+                          <label> ISS %</label>
+                          <input
+                            class=" form-control"
+                            type="number"
+                            name="iss"
+                            [(ngModel)]="formEmpresa.iss"
+                            #iss="ngModel"
+                          />
+                        </div>
+                    </div>
+                    <div class=" col-md-2">
+                        <div class=" form-group">
+                          <label> INSS %</label>
+                          <input
+                            class=" form-control"
+                            type="number"
+                            name="inss"
+                            [(ngModel)]="formEmpresa.inss"
+                            #inss="ngModel"
+                          />
+                        </div>
+                    </div>
+                    <div class=" col-md-2">
+                        <div class=" form-group">
+                          <label> IRRF %</label>
+                          <input
+                            class=" form-control"
+                            type="number"
+                            name="irrf"
+                            [(ngModel)]="formEmpresa.irrf"
+                            #irrf="ngModel"
+                          />
+                        </div>
+                    </div>
+                    <div class=" col-md-2">
+                        <div class=" form-group">
+                          <label> CSLL* %</label>
+                          <input
+                            class=" form-control"
+                            type="number"
+                            name="csll"
+                            [(ngModel)]="formEmpresa.csll"
+                            #csll="ngModel"
+                          />
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class=" title"><i class="tim-icons icon-attach-87 text-danger"></i> Adicionar Serviços</h5>
+            </div>
+            <div class="card-body">
+                <form #forSe="ngForm">
+                    <div class="row">
+                        <div class=" col-md-3">
+                            <div class=" form-group">
+                                <label> CNAE</label>
+                                <input
+                                    class=" form-control"
+                                    type="text"
+                                    name="cnae"
+                                    [(ngModel)]="servicos.cnae"
+                                    #cnae="ngModel"
+                                />
+                            </div>
+                        </div>
+                        <div class=" col-md-3">
+                            <div class=" form-group">
+                                <label> Item LC</label>
+                                <input
+                                    class=" form-control"
+                                    type="text"
+                                    name="itemLc"
+                                    [(ngModel)]="servicos.itemLc"
+                                    #itemLc="ngModel"
+                                />
+                            </div>
+                        </div>
+                        <div class=" col-md-3">
+                            <div class=" form-group">
+                                <label> Atividade Municípal</label>
+                                <input
+                                    class=" form-control"
+                                    type="text"
+                                    name="ativMuni"
+                                    [(ngModel)]="servicos.ativMuni"
+                                    #ativMunici="ngModel"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                          <button class="btn btn-primary btn-round btn-icon btn-lg" [disabled]="!cnae.value && !itemLc.value && !ativMunici.value"  (click)="addServicos()"><i class="tim-icons icon-simple-add"></i></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class=" table-responsive">
+                                <table class=" table tablesorter" id="">
+                                  <thead class=" text-primary">
+                                    <tr>
+                                      <th>CNAE</th>
+                                      <th>Item LC</th>
+                                      <th>Atividade Municípal</th>
+                                      <th class=" text-center">#</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody *ngIf="itensServico">
+                                    <tr *ngFor=" let item of itensServico; let i=index;">
+                                      <td>{{ item.cnae }}</td>
+                                      <td>{{ item.itemLc }}</td>
+                                      <td>{{ item.ativMuni }}</td>
+                                      <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1" (click)="remover(i)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                                    </tr>
+                                  </tbody>
+                                  <tbody *ngIf="itensServico == '' || !itensServico">
+                                    <tr>
+                                      <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum registro cadastrado</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+              </form>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <buttons-footer (enviarSubmit)="sendEmpresa($event)" [idEmpresa]="idEdit" [valida]="!formCad.valid"></buttons-footer>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+</div>

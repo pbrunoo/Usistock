@@ -1,0 +1,73 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-badge text-danger-states"> </i> Novo Funcionário</h5></div>
+          <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="formFuncionario()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+          <div class=" card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">Funcionários</h4>
+            <form>
+              <div class=" row">
+                <div class=" col-md-12">
+                    <div class=" form-group">
+                      <label></label>
+                      <input
+                        #searchFuncionario
+                        (keypress)="searchAllFuncionario()"
+                        [(ngModel)]="pesquisarFuncionario"
+                        name="pesquisarFuncionario"
+                        class=" form-control"
+                        placeholder="O que você quer pesquisar"
+                        type="text"
+                      />
+                  </div>
+                </div>
+                <div class=" card-footer">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>Função</th>
+                    <th>Empresa</th>
+                    <th>Contratação</th>
+                    <th class=" text-center">#</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="data">
+                  <tr *ngFor="let funcionario of funcionarios$ | async">
+                    <td>{{ funcionario.id }}</td>
+                    <td>{{ (funcionario.nomeCompleto.length > 10)? (funcionario.nomeCompleto | slice:0:10)+'...':(funcionario.nomeCompleto)}}</td>
+                    <td>{{ funcionario.trabalhista.funcao }}</td>
+                    <td>{{ (funcionario.trabalhista.empresa.length > 10)? (funcionario.trabalhista.empresa | slice:0:10)+'...':(funcionario.trabalhista.empresa) }}</td>
+                    <td>{{ funcionario.trabalhista.dataAdmissao | date: 'dd/MM/YYYY' }}</td>
+                    <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(funcionario.id)"><i class="tim-icons icon-pencil"></i></button><button class="btn btn btn-round btn-icon mr-1" (click)="onDelete(funcionario.id)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!data">
+                  <tr>
+                    <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

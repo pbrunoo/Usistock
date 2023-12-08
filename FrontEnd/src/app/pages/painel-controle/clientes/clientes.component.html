@@ -1,0 +1,82 @@
+
+<div class=" content">
+    <select-unidade (emitirShow)="showListClient($event)" (emitirUnidade)="listClientUnidadeById($event)"></select-unidade>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-shape-star  text-danger-states"> </i> Novo Cliente</h5></div>
+          <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="showFormClients()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+          <div class=" card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" row" *ngIf="showClient">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title">Clientes</h4>
+            <form>
+              <div class=" row">
+                <div class=" col-md-12">
+                    <div class=" form-group">
+                      <label></label>
+                      <input
+                        #searchCliente
+                        autocomplete="off"
+                        name="searchCliente"
+                        (keypress)="searchAllClient()"
+                        [(ngModel)]= "searchClient"
+                        class=" form-control"
+                        placeholder="O que você quer pesquisar"
+                        type="text"
+                      />
+                  </div>
+                </div>
+                <div class=" card-footer">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>CPF/CNPJ</th>
+                    <th>Cliente</th>
+                    <th>Telefone</th>
+                    <th class=" text-center">#</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="showData">
+                  <tr *ngFor="let cliente of clientes$ | async">
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.cpfCnpj | mask: '000.000.000-00 || 00.000.000/000-00' }}</td>
+                    <td>{{ cliente.razaoSocial }}</td>
+                    <td>{{ cliente.telefone | mask: '(00) 0000-0000 || (00) 0 0000-0000'}}</td>
+                    <td class=" text-center">
+                      <button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(cliente.id)">
+                        <i class="tim-icons icon-pencil"></i>
+                      </button>
+                      <button class="btn btn btn-round btn-icon" (click)="onDelete(cliente.id)">
+                        <i class="tim-icons icon-trash-simple"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="!showData">
+                  <tr>
+                    <td colspan="5" style="text-align: center;">
+                      <i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente para essa unidade
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

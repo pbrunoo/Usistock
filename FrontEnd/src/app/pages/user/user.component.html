@@ -1,0 +1,76 @@
+
+<div class=" content">
+  <select-unidade (emitirShow)="pesquisarP($event)" (emitirUnidade)="listUsersUnidadeById($event)"></select-unidade>
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-single-copy-04  text-danger-states"> </i> Novo Usuário</h5></div>
+        <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit"  (click)="formUsuario()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+        <div class=" card-body">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row" *ngIf="mostrar">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Usuários</h4>
+          <form #forUser ="ngForm">
+            <div class="row">
+              <div class=" col-md-12">
+                  <div class=" form-group">
+                    <label></label>
+                    <input type="text"
+                    #searhsUser
+                    class=" form-control"
+                    autocomplete="off"
+                    name="pesquisarUser"
+                    (keypress)="searchAll()"
+                    [(ngModel)] = "pesquisarUser"
+                    placeholder="O que você quer pesquisar"
+                    id="searhsUser"
+                  />
+                </div>
+              </div>
+              <div class=" card-footer">
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>id</th>
+                  <th>Login</th>
+                  <th>E-mail</th>
+                  <th>Nível Acesso</th>
+                  <th class=" text-center">#</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="data">
+                <tr *ngFor="let user of users$ | async">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.login }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.nivelAcesso }}</td>
+                  <td class=" text-center">
+                    <button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(user.id)"><i class="tim-icons icon-pencil"></i></button>
+                    <button class="btn btn btn-round btn-icon mr-1" (click)="onDelete(user.id)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="!data">
+                <tr>
+                  <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhum cliente cadastrado para essa unidade</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-square-pin  text-danger-states"> </i> Unidade</h5></div>
+        <div class=" card-body">
+          <form #forUnidade="ngForm">
+            <div class=" row">
+              <div class=" col-md-9 pr-md-1">
+                <div class=" form-group">
+                  <label> Selecione uma unidade</label>
+                  <select class="form-control"
+                  name="selectedUnidade"
+                  [(ngModel)]="selectedUnidade"
+                  #unidadeSelecionar = "ngModel"
+                  required>
+                    <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                </select>
+                <div *ngIf="!unidadeSelecionar.valid && unidadeSelecionar.touched" class="erro text-center">*Campo Obrigatório.</div>
+                </div>
+              </div>
+              <div class="col-md-2" style="margin-top: 20px;">
+                <button class=" btn btn-fill btn-danger" name="pesquisar" (click) = "pesquisarPedidos()" type="submit" [disabled]="!unidadeSelecionar.value">Pesquisar</button>
+              </div>
+              <div class=" card-footer">
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

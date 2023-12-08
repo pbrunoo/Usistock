@@ -1,0 +1,129 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-delivery-fast text-danger"></i> {{ opcao }} Fornecedor</h5></div>
+          <div class=" card-body">
+            <form #forFornecedor = "ngForm">
+              <div class=" row">
+                <div class=" col-md-3 pr-md-1">
+                  <div class=" form-group">
+                    <label> CPF/CNPJ*</label>
+                    <input
+                      class=" form-control"
+                      name="cpfCnpj"
+                      [(ngModel)]="formFornecedor.cpfCnpj"
+                      #cpfCnpj="ngModel"
+                      type="text"
+                      required
+                      mask="000.000.000-00 || 00.000.000/000-00"
+                    />
+                    <div *ngIf="!cpfCnpj.valid && cpfCnpj.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3 px-md-1">
+                  <div class=" form-group">
+                    <label> Razão Social*</label>
+                    <input
+                      class=" form-control"
+                      name="razaosocial"
+                      [(ngModel)]="formFornecedor.razaoSocial"
+                      #razaoSocial="ngModel"
+                      required
+                      type="text"
+                    />
+                    <div *ngIf="!razaoSocial.valid && razaoSocial.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                      <label> Unidade*</label>
+                      <select class="form-control"
+                      [(ngModel)]="formFornecedor.unidadeId"
+                      name="unidade"
+                      #unidade ="ngModel"
+                      required>
+                      <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                      </select>
+                      <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+              </div>
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                    <label for="exampleInputEmail1"> Telefone*</label>
+                    <input
+                      class=" form-control"
+                      name="telefone"
+                      [(ngModel)]="formFornecedor.telefone"
+                      #telefone="ngModel"
+                      required
+                      mask="(00) 0000-0000 || (00) 0 0000-0000"
+                      type="text"
+                    />
+                    <div *ngIf="!telefone.valid && telefone.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                    <label> E-mail*</label>
+                    <input
+                      class=" form-control"
+                      name="email"
+                      [(ngModel)]="formFornecedor.email"
+                      #email="ngModel"
+                      required
+                      email
+                      type="email"
+                    />
+                    <div *ngIf="!email.valid && email.touched" class="erro text-center">*E-mail Inválido.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                    <label> Responsável*</label>
+                    <input
+                      class=" form-control"
+                      name="responsavel"
+                      [(ngModel)]="formFornecedor.responsavel"
+                      #responsavel="ngModel"
+                      type="text"
+                      required
+                    />
+                    <div *ngIf="!responsavel.valid && responsavel.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-6">
+                  <div class=" form-group">
+                    <label for="exampleInputEmail1"> Endereço*</label>
+                    <input
+                      class=" form-control"
+                      name="endereco"
+                      [(ngModel)]="formFornecedor.endereco"
+                      #endereco="ngModel"
+                      required
+                      type="text"
+                    />
+                    <div *ngIf="!endereco.valid && endereco.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <buttons-footer (enviarSubmit)="enviarFornecedor($event)" [valida]="!forFornecedor.valid" [idFornecedor]="idEdit"></buttons-footer>
+              </div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

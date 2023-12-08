@@ -1,0 +1,66 @@
+.ng-invalid .ng-touched:not(form){
+    border: 1px solid red;
+    border-radius: 10px;
+}
+.erro{
+    color: red !important;
+    margin-top: -16px !important;
+
+}
+
+.loader {
+    border: 14px solid #575c77; /* Light grey */
+    border-top: 14px solid #eb5e2e; /* Blue */
+    border-radius: 50%;
+    width: 85px;
+    height: 85px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .erros {
+    background-color: #eb5e2e;
+    z-index: 999;
+    width: 97%;
+    position:absolute;
+    top: 0;
+    margin: 0;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  .alertTrash {
+    background-color: #eb5e2e;
+    z-index: 999;
+    width: 30%;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-32.5%, -50%);
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 990px){
+    .alertTrash {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+    }
+}
+
+  

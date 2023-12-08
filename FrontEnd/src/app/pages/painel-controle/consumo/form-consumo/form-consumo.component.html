@@ -1,0 +1,67 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-delivery-fast text-danger"></i> {{ opcao }} Consumo</h5></div>
+          <div class=" card-body">
+            <form #forConsumo="ngForm">
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Produto*</label>
+                    <input
+                      class=" form-control"
+                      name="produto"
+                      [(ngModel)]="formConsumo.produto"
+                      #produto="ngModel"
+                      type="text"
+                      required
+
+                    />
+                    <div *ngIf="!produto.valid && produto.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-4">
+                    <div class=" form-group">
+                        <label> Unidade*</label>
+                        <select class="form-control"
+                        name="unidade"
+                        [(ngModel)]="formConsumo.unidadeId"
+                        #unidade="ngModel"
+                        required (change)="onChange($event, unidade.value)">
+                          <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                        </select>
+                        <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                      </div>
+                </div>
+                <div class=" col-md-4">
+                  <div class=" form-group">
+                      <label> Fornecedor*</label>
+                      <select class="form-control"
+                      name="fornecedor"
+                      [(ngModel)]="formConsumo.fornecedor"
+                      #fornecedor="ngModel"
+                      required>
+                        <option *ngFor="let fornecedor of fornecedores" value="{{ fornecedor.id }}">{{ fornecedor.razaoSocial }}</option>
+                      </select>
+                      <div *ngIf="!fornecedor.valid && fornecedor.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <buttons-footer [valida]="!forConsumo.valid" (enviarSubmit)="enviarConsumo($event)" [idConsumo]="idEdit"></buttons-footer>
+              </div>
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

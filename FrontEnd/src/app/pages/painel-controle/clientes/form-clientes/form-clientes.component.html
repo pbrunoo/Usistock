@@ -1,0 +1,264 @@
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-shape-star text-danger"></i>
+            {{opcaoRegisterOrEdit}} Cliente</h5></div>
+          <div class=" card-body">
+            <form #forCliente="ngForm">
+              <div class=" row">
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                    <label> CPF/CNPJ*</label>
+                    <input
+                      class=" form-control"
+                      type="text"
+                      name="cpf_cnpj"
+                      [(ngModel)]="formClient.cpfCnpj"
+                      #cliente="ngModel"
+                      required
+                      mask="000.000.000-00||00.000.000/0000-00"
+                    />
+                    <div *ngIf="!cliente.valid && cliente.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                    <label> Inscrição Estadual</label>
+                    <input
+                      class=" form-control"
+                      name="inscEstadual"
+                      type="number"
+                      [(ngModel)]="formClient.inscEstadual"
+                      #inscEstadual="ngModel"
+                      required
+                    />
+                    <div *ngIf="!inscEstadual.valid && inscEstadual.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                    <label for="exampleInputEmail1"> Razão Social*</label>
+                    <input
+                      class=" form-control"
+                      name="razaoSocial"
+                      type="text"
+                      [(ngModel)]="formClient.razaoSocial"
+                      #razaoSocial="ngModel"
+                      placeholder="Companhia LTda"
+                      required
+                    />
+                    <div *ngIf="!razaoSocial.valid && razaoSocial.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+
+                <div class=" col-md-3">
+                  <div class=" form-group">
+                      <label> Selecione uma unidade*</label>
+                      <select class="form-control"
+                      [(ngModel)]="formClient.unidadeId"
+                      name="unidade"
+                      #unidade ="ngModel"
+                      required>
+                      <option *ngFor="let unidade of unidades" value="{{ unidade.id }}">{{ unidade.nomeUnidade }}</option>
+                      </select>
+                      <div *ngIf="!unidade.valid && unidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+              </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-4 pr-md-1">
+                  <div class=" form-group">
+                    <label> Nome Fantasia* </label>
+                    <input
+                      class=" form-control"
+                      name="nomeFantasia"
+                      [(ngModel)]="formClient.nomeFantasia"
+                      #nomeFantasia="ngModel"
+                      type="text"
+                      required
+                    />
+                    <div *ngIf="!nomeFantasia.valid && nomeFantasia.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-2 pl-md-1">
+                    <div class=" form-group">
+                        <label> CEP*</label>
+                        <input
+                        class=" form-control"
+                        placeholder="74.000-000"
+                        type="text"
+                        name="cep"
+                        [(ngModel)]="formClient.cep"
+                        #cep="ngModel"
+                        mask="00.000-000"
+                        required
+                      />
+                      <div *ngIf="!cep.valid && cep.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-6 pl-md-1">
+                    <div class=" form-group">
+                      <label> Endereço*</label>
+                      <input
+                        class=" form-control"
+                        name="endereco"
+                        [(ngModel)]="formClient.endereco"
+                        #endereco="ngModel"
+                        placeholder="Av. Loren Ipsu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        type="text"
+                        required
+                      />
+                      <div *ngIf="!endereco.valid && endereco.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                  </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-5">
+                    <div class=" form-group">
+                      <label> Complemento*</label>
+                      <input
+                        class=" form-control"
+                        name="complemento"
+                        [(ngModel)]="formClient.complemento"
+                        #complemento="ngModel"
+                        required
+                        type="text"
+                      />
+                      <div *ngIf="!complemento.valid && complemento.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-2">
+                  <div class=" form-group">
+                    <label> Número*</label>
+                    <input
+                      class=" form-control"
+                      type="text"
+                      name="numero"
+                      [(ngModel)]="formClient.numero"
+                      #numero="ngModel"
+                      required
+                    />
+                    <div *ngIf="!numero.valid && numero.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-5">
+                    <div class=" form-group">
+                      <label> Bairro*</label>
+                      <input
+                        class=" form-control"
+                        type="text"
+                        name="bairro"
+                        [(ngModel)]="formClient.bairro"
+                        #bairro="ngModel"
+                        required
+                      />
+                      <div *ngIf="!bairro.valid && bairro.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+              </div>
+              <div class=" row">
+                <div class=" col-md-3">
+                    <div class=" form-group">
+                      <label> Cidade*</label>
+                      <input
+                        class=" form-control"
+                        type="text"
+                        name="cidade"
+                        [(ngModel)]="formClient.cidade"
+                        #cidade="ngModel"
+                        required
+                      />
+                      <div *ngIf="!cidade.valid && cidade.touched" class="erro text-center">*Campo Obrigatório.</div>
+                    </div>
+                </div>
+                <div class=" col-md-2 pr-md-1">
+                  <div class=" form-group">
+                    <label> UF*</label>
+                    <select class="form-control"
+                    name="uf"
+                    [(ngModel)]="formClient.uf"
+                    #uf="ngModel"
+                    required>
+                        <option value="AC">AC</option>
+                        <option value="AL">AL</option>
+                        <option value="AP">AP</option>
+                        <option value="AM">AM</option>
+                        <option value="BA">BA</option>
+                        <option value="CE">CE</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="MA">MA</option>
+                        <option value="MT">MT</option>
+                        <option value="MS">MS</option>
+                        <option value="MG">MG</option>
+                        <option value="PA">PA</option>
+                        <option value="PB">PB</option>
+                        <option value="PR">PR</option>
+                        <option value="PE">PE</option>
+                        <option value="PI">PI</option>
+                        <option value="RJ">RJ</option>
+                        <option value="RN">RN</option>
+                        <option value="RS">RS</option>
+                        <option value="RO">RO</option>
+                        <option value="RR">RR</option>
+                        <option value="SC">SC</option>
+                        <option value="SP">SP</option>
+                        <option value="SE">SE</option>
+                        <option value="TO">TO</option>
+                    </select>
+                    <div *ngIf="!uf.valid && uf.touched" class="erro text-center">*Campo Obrigatório.</div>
+                </div>
+                </div>
+                <div class=" col-md-3 px-md-1">
+                  <div class=" form-group">
+                    <label> Telefone*</label>
+                    <input
+                      class=" form-control"
+                      placeholder="(62) 3333-4832"
+                      type="text"
+                      name="telefone"
+                      [(ngModel)]="formClient.telefone"
+                      #telefone="ngModel"
+                      mask="(00) 0 0000-0000"
+                      required
+                    />
+                    <div *ngIf="!telefone.valid && telefone.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+                <div class=" col-md-4 pl-md-1">
+                  <div class=" form-group">
+                    <label> E-mail*</label>
+                    <input
+                      class=" form-control"
+                      placeholder="email@email.com"
+                      type="email"
+                      [(ngModel)]="formClient.email"
+                      name="email"
+                      #email="ngModel"
+                      required
+                    />
+                    <div *ngIf="!email.valid && email.touched" class="erro text-center">*Campo Obrigatório.</div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <buttons-footer (enviarSubmit)="sendClient($event)" [valida]="!forCliente.valid" [idCliente]="idEdit"></buttons-footer>
+          </div>
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+</div>

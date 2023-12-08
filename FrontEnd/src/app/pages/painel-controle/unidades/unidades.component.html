@@ -1,0 +1,70 @@
+
+<div class=" content">
+    <div class=" row">
+        <div class=" col-md-12">
+          <div class=" card">
+            <div class=" card-header"><h5 class=" title"><i class="tim-icons icon-square-pin text-danger"></i> Nova Unidade</h5></div>
+            <button class=" btn" style="width: 80%; margin-left:auto; margin-right: auto;" type="submit" (click)="showformUnidades()"><i class="tim-icons icon-simple-add"></i> ADICIONAR</button>
+            <div class=" card-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title"> Unidades</h4>
+            <form>
+              <div class=" row">
+                <div class=" col-md-12">
+                    <div class=" form-group">
+                      <label></label>
+                      <input
+                        class=" form-control"
+                        placeholder="O que você quer pesquisar"
+                        type="text"
+                        name="pesquisar"
+                        [(ngModel)]="textPesquisar"
+                        (keypress)="searchAllUnity()"
+                        #pesquisar
+                      />
+                  </div>
+                </div>
+                <div class=" card-footer">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class=" card-body">
+            <div class=" table-responsive">
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>id</th>
+                    <th>Unidade</th>
+                    <th>Empresa</th>
+                    <th class=" text-center">#</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="showData">
+                  <tr *ngFor="let unidade of unidades$ | async">
+                    <td>{{ unidade.id }}</td>
+                    <td>{{ unidade.nomeUnidade }}</td>
+                    <td>{{ unidade.razaoSocial }}</td>
+                    <td class=" text-center"><button class="btn btn-primary btn-round btn-icon mr-1" (click)="onEdit(unidade.id)"><i class="tim-icons icon-pencil"></i></button><button class="btn btn btn-round btn-icon mr-1" (click)="onDelete(unidade.id)"><i class="tim-icons icon-trash-simple"></i></button></td>
+                  </tr>
+
+                </tbody>
+                <tbody *ngIf="!showData">
+                  <tr>
+                    <td colspan="5" style="text-align: center;"><i class="tim-icons icon-alert-circle-exc"></i> Nenhuma Unidade cadastrada</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
